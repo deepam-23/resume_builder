@@ -10,7 +10,9 @@ import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import Builder from "./pages/Builder";
 import Login from "./pages/Login";
+import Preview from "./pages/Preview";
 import { AuthProvider } from "./context/AuthContext";
+import { ResumeProvider } from "./context/ResumeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -29,8 +31,9 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/privacy" element={<Privacy />} />
               
-              <Route element={<ProtectedRoute />}>
+              <Route element={<ResumeProvider><ProtectedRoute /></ResumeProvider>}>
                 <Route path="/builder" element={<Builder />} />
+                <Route path="/preview" element={<Preview />} />
               </Route>
 
               <Route path="*" element={<NotFound />} />

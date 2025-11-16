@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ResumeData } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,16 +6,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Trash2, PlusCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useResume } from "@/context/ResumeContext";
 
-interface ResumeFormProps {
-  resumeData: ResumeData;
-  setResumeData: React.Dispatch<React.SetStateAction<ResumeData>>;
-}
-
-const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) => {
+const ResumeForm: React.FC = () => {
+  const { resumeData, setResumeData } = useResume();
   const [skillInput, setSkillInput] = useState("");
 
-  const handleChange = (section: keyof ResumeData, field: string, value: string) => {
+  const handleChange = (section: keyof typeof resumeData, field: string, value: string) => {
     setResumeData(prev => ({
       ...prev,
       [section]: { ...prev[section], [field]: value },
