@@ -80,10 +80,10 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) =>
       <Card>
         <CardHeader><CardTitle>Personal Details</CardTitle></CardHeader>
         <CardContent className="space-y-4">
-          <div><Label htmlFor="name">Full Name</Label><Input id="name" value={resumeData.personalDetails.name} onChange={e => handleChange('personalDetails', 'name', e.target.value)} /></div>
-          <div><Label htmlFor="email">Email</Label><Input id="email" type="email" value={resumeData.personalDetails.email} onChange={e => handleChange('personalDetails', 'email', e.target.value)} /></div>
-          <div><Label htmlFor="phone">Phone</Label><Input id="phone" value={resumeData.personalDetails.phone} onChange={e => handleChange('personalDetails', 'phone', e.target.value)} /></div>
-          <div><Label htmlFor="linkedin">LinkedIn</Label><Input id="linkedin" value={resumeData.personalDetails.linkedin} onChange={e => handleChange('personalDetails', 'linkedin', e.target.value)} /></div>
+          <div className="grid gap-2"><Label htmlFor="name">Full Name</Label><Input id="name" value={resumeData.personalDetails.name} onChange={e => handleChange('personalDetails', 'name', e.target.value)} /></div>
+          <div className="grid gap-2"><Label htmlFor="email">Email</Label><Input id="email" type="email" value={resumeData.personalDetails.email} onChange={e => handleChange('personalDetails', 'email', e.target.value)} /></div>
+          <div className="grid gap-2"><Label htmlFor="phone">Phone</Label><Input id="phone" value={resumeData.personalDetails.phone} onChange={e => handleChange('personalDetails', 'phone', e.target.value)} /></div>
+          <div className="grid gap-2"><Label htmlFor="linkedin">LinkedIn</Label><Input id="linkedin" value={resumeData.personalDetails.linkedin} onChange={e => handleChange('personalDetails', 'linkedin', e.target.value)} /></div>
         </CardContent>
       </Card>
 
@@ -96,12 +96,12 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) =>
         <CardHeader><CardTitle>Work Experience</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           {resumeData.experience.map((exp, index) => (
-            <div key={exp.id} className="p-4 border rounded-md space-y-2 relative">
+            <div key={exp.id} className="p-4 border rounded-md space-y-3 relative">
               <Button variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => removeArrayItem('experience', exp.id)}><Trash2 className="h-4 w-4" /></Button>
-              <Input placeholder="Job Title" value={exp.jobTitle} onChange={e => handleArrayChange('experience', index, 'jobTitle', e.target.value)} />
-              <Input placeholder="Company" value={exp.company} onChange={e => handleArrayChange('experience', index, 'company', e.target.value)} />
-              <div className="flex space-x-2"><Input placeholder="Start Date" value={exp.startDate} onChange={e => handleArrayChange('experience', index, 'startDate', e.target.value)} /><Input placeholder="End Date" value={exp.endDate} onChange={e => handleArrayChange('experience', index, 'endDate', e.target.value)} /></div>
-              <Textarea placeholder="Responsibilities" value={exp.responsibilities} onChange={e => handleArrayChange('experience', index, 'responsibilities', e.target.value)} />
+              <div className="grid gap-2"><Label>Job Title</Label><Input placeholder="e.g. Software Engineer" value={exp.jobTitle} onChange={e => handleArrayChange('experience', index, 'jobTitle', e.target.value)} /></div>
+              <div className="grid gap-2"><Label>Company</Label><Input placeholder="e.g. Google" value={exp.company} onChange={e => handleArrayChange('experience', index, 'company', e.target.value)} /></div>
+              <div className="grid grid-cols-2 gap-4"><div className="grid gap-2"><Label>Start Date</Label><Input placeholder="e.g. Jan 2020" value={exp.startDate} onChange={e => handleArrayChange('experience', index, 'startDate', e.target.value)} /></div><div className="grid gap-2"><Label>End Date</Label><Input placeholder="e.g. Present" value={exp.endDate} onChange={e => handleArrayChange('experience', index, 'endDate', e.target.value)} /></div></div>
+              <div className="grid gap-2"><Label>Responsibilities</Label><Textarea placeholder="Describe your key achievements..." value={exp.responsibilities} onChange={e => handleArrayChange('experience', index, 'responsibilities', e.target.value)} /></div>
             </div>
           ))}
           <Button variant="outline" onClick={() => addArrayItem('experience')}><PlusCircle className="mr-2 h-4 w-4" /> Add Experience</Button>
@@ -112,11 +112,11 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) =>
         <CardHeader><CardTitle>Projects</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           {resumeData.projects.map((proj, index) => (
-            <div key={proj.id} className="p-4 border rounded-md space-y-2 relative">
+            <div key={proj.id} className="p-4 border rounded-md space-y-3 relative">
               <Button variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => removeArrayItem('projects', proj.id)}><Trash2 className="h-4 w-4" /></Button>
-              <Input placeholder="Project Name" value={proj.name} onChange={e => handleArrayChange('projects', index, 'name', e.target.value)} />
-              <Input placeholder="Link (optional)" value={proj.link} onChange={e => handleArrayChange('projects', index, 'link', e.target.value)} />
-              <Textarea placeholder="Description" value={proj.description} onChange={e => handleArrayChange('projects', index, 'description', e.target.value)} />
+              <div className="grid gap-2"><Label>Project Name</Label><Input placeholder="e.g. Personal Portfolio" value={proj.name} onChange={e => handleArrayChange('projects', index, 'name', e.target.value)} /></div>
+              <div className="grid gap-2"><Label>Link</Label><Input placeholder="e.g. github.com/user/repo" value={proj.link} onChange={e => handleArrayChange('projects', index, 'link', e.target.value)} /></div>
+              <div className="grid gap-2"><Label>Description</Label><Textarea placeholder="Describe the project and your role..." value={proj.description} onChange={e => handleArrayChange('projects', index, 'description', e.target.value)} /></div>
             </div>
           ))}
           <Button variant="outline" onClick={() => addArrayItem('projects')}><PlusCircle className="mr-2 h-4 w-4" /> Add Project</Button>
@@ -127,11 +127,11 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) =>
         <CardHeader><CardTitle>Education</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           {resumeData.education.map((edu, index) => (
-            <div key={edu.id} className="p-4 border rounded-md space-y-2 relative">
+            <div key={edu.id} className="p-4 border rounded-md space-y-3 relative">
               <Button variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => removeArrayItem('education', edu.id)}><Trash2 className="h-4 w-4" /></Button>
-              <Input placeholder="Degree / Certificate" value={edu.degree} onChange={e => handleArrayChange('education', index, 'degree', e.target.value)} />
-              <Input placeholder="School / Institution" value={edu.school} onChange={e => handleArrayChange('education', index, 'school', e.target.value)} />
-              <div className="flex space-x-2"><Input placeholder="Start Date" value={edu.startDate} onChange={e => handleArrayChange('education', index, 'startDate', e.target.value)} /><Input placeholder="End Date" value={edu.endDate} onChange={e => handleArrayChange('education', index, 'endDate', e.target.value)} /></div>
+              <div className="grid gap-2"><Label>Degree / Certificate</Label><Input placeholder="e.g. B.S. in Computer Science" value={edu.degree} onChange={e => handleArrayChange('education', index, 'degree', e.target.value)} /></div>
+              <div className="grid gap-2"><Label>School / Institution</Label><Input placeholder="e.g. State University" value={edu.school} onChange={e => handleArrayChange('education', index, 'school', e.target.value)} /></div>
+              <div className="grid grid-cols-2 gap-4"><div className="grid gap-2"><Label>Start Date</Label><Input placeholder="e.g. Aug 2016" value={edu.startDate} onChange={e => handleArrayChange('education', index, 'startDate', e.target.value)} /></div><div className="grid gap-2"><Label>End Date</Label><Input placeholder="e.g. May 2020" value={edu.endDate} onChange={e => handleArrayChange('education', index, 'endDate', e.target.value)} /></div></div>
             </div>
           ))}
           <Button variant="outline" onClick={() => addArrayItem('education')}><PlusCircle className="mr-2 h-4 w-4" /> Add Education</Button>
@@ -142,11 +142,11 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) =>
         <CardHeader><CardTitle>Certifications</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           {resumeData.certifications.map((cert, index) => (
-            <div key={cert.id} className="p-4 border rounded-md space-y-2 relative">
+            <div key={cert.id} className="p-4 border rounded-md space-y-3 relative">
               <Button variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => removeArrayItem('certifications', cert.id)}><Trash2 className="h-4 w-4" /></Button>
-              <Input placeholder="Certification Name" value={cert.name} onChange={e => handleArrayChange('certifications', index, 'name', e.target.value)} />
-              <Input placeholder="Issuing Organization" value={cert.issuer} onChange={e => handleArrayChange('certifications', index, 'issuer', e.target.value)} />
-              <Input placeholder="Date Issued" value={cert.date} onChange={e => handleArrayChange('certifications', index, 'date', e.target.value)} />
+              <div className="grid gap-2"><Label>Certification Name</Label><Input placeholder="e.g. AWS Certified Cloud Practitioner" value={cert.name} onChange={e => handleArrayChange('certifications', index, 'name', e.target.value)} /></div>
+              <div className="grid gap-2"><Label>Issuing Organization</Label><Input placeholder="e.g. Amazon Web Services" value={cert.issuer} onChange={e => handleArrayChange('certifications', index, 'issuer', e.target.value)} /></div>
+              <div className="grid gap-2"><Label>Date Issued</Label><Input placeholder="e.g. June 2021" value={cert.date} onChange={e => handleArrayChange('certifications', index, 'date', e.target.value)} /></div>
             </div>
           ))}
           <Button variant="outline" onClick={() => addArrayItem('certifications')}><PlusCircle className="mr-2 h-4 w-4" /> Add Certification</Button>
