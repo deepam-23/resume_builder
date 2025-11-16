@@ -15,6 +15,20 @@ export interface Education {
   endDate: string;
 }
 
+export interface Project {
+  id: number;
+  name: string;
+  description: string;
+  link: string;
+}
+
+export interface Certification {
+  id: number;
+  name: string;
+  issuer: string;
+  date: string;
+}
+
 export interface ResumeData {
   personalDetails: {
     name: string;
@@ -25,5 +39,7 @@ export interface ResumeData {
   summary: string;
   experience: WorkExperience[];
   education: Education[];
+  projects: Project[];
+  certifications: Certification[];
   skills: string[];
 }

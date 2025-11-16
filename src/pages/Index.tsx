@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { useReactToPrint } from 'react-to-print';
 import { Printer } from 'lucide-react';
 import { ResumeData } from '@/types';
-import { MadeWithDyad } from "@/components/made-with-dyad";
 
 const initialData: ResumeData = {
   personalDetails: {
@@ -34,6 +33,15 @@ const initialData: ResumeData = {
       endDate: 'May 2016',
     },
   ],
+  projects: [
+    {
+      id: 1,
+      name: 'E-commerce Platform',
+      description: 'Developed a full-stack e-commerce website using React and Node.js, resulting in a 30% increase in online sales.',
+      link: 'github.com/janedoe/e-commerce'
+    }
+  ],
+  certifications: [],
   skills: ['Project Management', 'Agile Methodologies', 'Scrum', 'JIRA', 'React', 'Node.js'],
 };
 
@@ -47,34 +55,27 @@ const Index = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 sm:p-8">
+    <div className="p-4 sm:p-8">
       <div className="max-w-screen-2xl mx-auto">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 dark:text-white">ATS-Friendly Resume Builder</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mt-2">
-            Create a professional, machine-readable resume in minutes.
-          </p>
-        </header>
         <main className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="lg:order-1">
             <ResumeForm resumeData={resumeData} setResumeData={setResumeData} />
           </div>
           <div className="lg:order-2">
-            <div className="sticky top-8">
+            <div className="sticky top-24">
               <div className="flex justify-end mb-4">
                 <Button onClick={handlePrint}>
                   <Printer className="mr-2 h-4 w-4" />
                   Download / Print
                 </Button>
               </div>
-              <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-auto max-h-[80vh]">
+              <div className="bg-white shadow-lg rounded-lg overflow-auto max-h-[calc(100vh-10rem)]">
                 <ResumePreview ref={previewRef} data={resumeData} />
               </div>
             </div>
           </div>
         </main>
       </div>
-      <MadeWithDyad />
     </div>
   );
 };

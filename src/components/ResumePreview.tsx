@@ -53,6 +53,24 @@ const ResumePreview = React.forwardRef<HTMLDivElement, ResumePreviewProps>(
           ))}
         </section>
 
+        {/* Projects */}
+        {data.projects.length > 0 && (
+          <section className="mt-4">
+            <h2 className="text-sm font-bold uppercase tracking-widest border-b-2 border-black pb-1 mb-2">
+              Projects
+            </h2>
+            {data.projects.map((proj) => (
+              <div key={proj.id} className="mb-3">
+                <div className="flex items-center space-x-2">
+                  <h3 className="font-bold">{proj.name || "Project Name"}</h3>
+                  {proj.link && <a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline">Link</a>}
+                </div>
+                <p className="text-xs mt-1">{proj.description}</p>
+              </div>
+            ))}
+          </section>
+        )}
+
         {/* Education */}
         <section className="mt-4">
           <h2 className="text-sm font-bold uppercase tracking-widest border-b-2 border-black pb-1 mb-2">
@@ -70,6 +88,22 @@ const ResumePreview = React.forwardRef<HTMLDivElement, ResumePreviewProps>(
             </div>
           ))}
         </section>
+
+        {/* Certifications */}
+        {data.certifications.length > 0 && (
+          <section className="mt-4">
+            <h2 className="text-sm font-bold uppercase tracking-widest border-b-2 border-black pb-1 mb-2">
+              Certifications
+            </h2>
+            {data.certifications.map((cert) => (
+              <div key={cert.id} className="mb-3 text-xs">
+                <span className="font-bold">{cert.name || "Certification Name"}</span>
+                <span> - {cert.issuer || "Issuing Organization"}</span>
+                <span>, {cert.date || "Date"}</span>
+              </div>
+            ))}
+          </section>
+        )}
 
         {/* Skills */}
         <section className="mt-4">

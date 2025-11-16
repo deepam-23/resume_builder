@@ -27,7 +27,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) =>
     setResumeData(prev => ({ ...prev, summary: e.target.value }));
   };
 
-  const handleArrayChange = (section: 'experience' | 'education', index: number, field: string, value: string) => {
+  const handleArrayChange = (section: 'experience' | 'education' | 'projects' | 'certifications', index: number, field: string, value: string) => {
     setResumeData(prev => {
       const newArray = [...prev[section]];
       newArray[index] = { ...newArray[index], [field]: value };
@@ -35,14 +35,26 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) =>
     });
   };
 
-  const addArrayItem = (section: 'experience' | 'education') => {
-    const newItem = section === 'experience'
-      ? { id: Date.now(), jobTitle: "", company: "", startDate: "", endDate: "", responsibilities: "- Achieved X\n- Managed Y" }
-      : { id: Date.now(), degree: "", school: "", startDate: "", endDate: "" };
+  const addArrayItem = (section: 'experience' | 'education' | 'projects' | 'certifications') => {
+    let newItem;
+    switch (section) {
+      case 'experience':
+        newItem = { id: Date.now(), jobTitle: "", company: "", startDate: "", endDate: "", responsibilities: "- Achieved X\n- Managed Y" };
+        break;
+      case 'education':
+        newItem = { id: Date.now(), degree: "", school: "", startDate: "", endDate: "" };
+        break;
+      case 'projects':
+        newItem = { id: Date.now(), name: "", description: "", link: "" };
+        break;
+      case 'certifications':
+        newItem = { id: Date.now(), name: "", issuer: "", date: "" };
+        break;
+    }
     setResumeData(prev => ({ ...prev, [section]: [...prev[section], newItem] }));
   };
 
-  const removeArrayItem = (section: 'experience' | 'education', id: number) => {
+  const removeArrayItem = (section: 'experience' | 'education' | 'projects' | 'certifications', id: number) => {
     setResumeData(prev => ({
       ...prev,
       [section]: prev[section].filter(item => item.id !== id),
@@ -97,6 +109,21 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) =>
       </Card>
 
       <Card>
+        <CardHeader><CardTitle>Projects</CardTitle></CardHeader>
+        <CardContent className="space-y-4">
+          {resumeData.projects.map((proj, index) => (
+            <div key={proj.id} className="p-4 border rounded-md space-y-2 relative">
+              <Button variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => removeArrayItem('projects', proj.id)}><Trash2 className="h-4 w-4" /></Button>
+              <Input placeholder="Project Name" value={proj.name} onChange={e => handleArrayChange('projects', index, 'name', e.target.value)} />
+              <Input placeholder="Link (optional)" value={proj.link} onChange={e => handleArrayChange('projects', index, 'link', e.target.value)} />
+              <Textarea placeholder="Description" value={proj.description} onChange={e => handleArrayChange('projects', index, 'description', e.target.value)} />
+            </div>
+          ))}
+          <Button variant="outline" onClick={() => addArrayItem('projects')}><PlusCircle className="mr-2 h-4 w-4" /> Add Project</Button>
+        </CardContent>
+      </Card>
+
+      <Card>
         <CardHeader><CardTitle>Education</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           {resumeData.education.map((edu, index) => (
@@ -108,6 +135,21 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resumeData, setResumeData }) =>
             </div>
           ))}
           <Button variant="outline" onClick={() => addArrayItem('education')}><PlusCircle className="mr-2 h-4 w-4" /> Add Education</Button>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader><CardTitle>Certifications</CardTitle></CardHeader>
+        <CardContent className="space-y-4">
+          {resumeData.certifications.map((cert, index) => (
+            <div key={cert.id} className="p-4 border rounded-md space-y-2 relative">
+              <Button variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => removeArrayItem('certifications', cert.id)}><Trash2 className="h-4 w-4" /></Button>
+              <Input placeholder="Certification Name" value={cert.name} onChange={e => handleArrayChange('certifications', index, 'name', e.target.value)} />
+              <Input placeholder="Issuing Organization" value={cert.issuer} onChange={e => handleArrayChange('certifications', index, 'issuer', e.target.value)} />
+              <Input placeholder="Date Issued" value={cert.date} onChange={e => handleArrayChange('certifications', index, 'date', e.target.value)} />
+            </div>
+          ))}
+          <Button variant="outline" onClick={() => addArrayItem('certifications')}><PlusCircle className="mr-2 h-4 w-4" /> Add Certification</Button>
         </CardContent>
       </Card>
 
