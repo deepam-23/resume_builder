@@ -10,7 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/context/AuthContext";
-import { showError } from "@/utils/toast";
 
 const Login = () => {
   const { login } = useAuth();
@@ -20,10 +19,6 @@ const Login = () => {
     // This is a placeholder. In a real app, you'd validate credentials.
     // For now, any login attempt is successful.
     login();
-  };
-
-  const handleSocialLogin = () => {
-    showError("Social login is not implemented yet. Please add Supabase to enable it.");
   };
 
   return (
@@ -50,22 +45,6 @@ const Login = () => {
             </Button>
           </CardContent>
         </form>
-        <CardFooter className="flex flex-col gap-4">
-          <div className="relative w-full">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-card px-2 text-muted-foreground">
-                Or continue with
-              </span>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-2 w-full">
-             <Button variant="outline" onClick={handleSocialLogin}>GitHub</Button>
-             <Button variant="outline" onClick={handleSocialLogin}>Google</Button>
-          </div>
-        </CardFooter>
       </Card>
     </div>
   );

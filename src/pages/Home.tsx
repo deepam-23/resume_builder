@@ -12,6 +12,12 @@ const Home = () => {
       <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground">
         Create a clean, modern, and ATS-friendly resume in minutes. Our builder guides you through the process, ensuring you stand out to recruiters.
       </p>
+      <div className="mt-4 text-green-600 font-semibold text-xl">
+        🚀 Completely Free - No Sign-ups, No Limits, No Ads!
+      </div>
+      <div className="mt-2 text-muted-foreground">
+        Build, download, and share your resume instantly. Start landing your dream job today!
+      </div>
       <div className="mt-8 flex justify-center gap-4">
         <Button asChild size="lg">
           <Link to="/builder">
