@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">vibrant-seahorse-skid</string>
+    <string name="title_activity_main">vibrant-seahorse-skid</string>
+    <string name="package_name">com.example.vibrantseahorseskid</string>
+    <string name="custom_url_scheme">com.example.vibrantseahorseskid</string>
+</resources>
