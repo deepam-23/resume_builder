@@ -10,6 +10,22 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "pnpm": {
+    "overrides": {
+      "@swc/core": "latest",
+      "core-js": "latest",
+      "esbuild": "latest"
+    },
+    "packageExtensions": {
+      "@swc/core": {
+        "optionalDependencies": {
+          "@node-rs/xxhash-linux-x64-gnu": "^2.0.2",
+          "@node-rs/xxhash-linux-x64-musl": "^2.0.2",
+          "@node-rs/xxhash-darwin-x64": "^2.0.2",
+          "@node-rs/xxhash-win32-x64-msvc": "^2.0.2"
+        }
+      }
+    }
   "dependencies": {
     "@capacitor/android": "^7.4.4",
     "@capacitor/cli": "^7.4.4",
